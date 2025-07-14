@@ -2,7 +2,6 @@ import OpenAI from 'openai';
 import { WebsiteAnalysis, Issue } from '../types/analysis';
 import { captureWebsiteScreenshot } from './screenshot';
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
 
 // Global issue counter for unique issue IDs
 let issueCounter = 0;
@@ -61,11 +60,27 @@ async function captureWebsiteContent(url: string): Promise<{
     scrollHeight: number;
   };
 }> {
+  console.log('🔧 Launching Puppeteer browser...');
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath(),
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-extensions',
+      '--disable-plugins',
+      '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+      '--disable-renderer-backgrounding',
+      '--disable-features=TranslateUI',
+      '--disable-ipc-flooding-protection'
+    ],
     headless: true,
   });
+  console.log('✅ Browser launched successfully');
 
   try {
     const page = await browser.newPage();
@@ -233,6 +248,7 @@ export async function analyzeWebsiteWithAI(url: string): Promise<WebsiteAnalysis
   
   try {
     console.log('📄 Capturing website content...');
+    console.log('🔧 Using puppeteer-core with @sparticuz/chromium');
     websiteContent = await captureWebsiteContent(url);
     console.log('✅ Website content captured successfully');
     

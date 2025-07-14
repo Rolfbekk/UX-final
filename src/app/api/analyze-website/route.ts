@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { analyzeWebsiteWithAI, generateMockAnalysis } from '../../../utils/ai-analysis';
-import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
 
 export async function POST(request: NextRequest) {
   try {

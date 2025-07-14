@@ -1,8 +1,8 @@
 {
-  "/api/health/route": "/api/health",
-  "/favicon.ico/route": "/favicon.ico",
-  "/api/config-status/route": "/api/config-status",
-  "/_not-found/page": "/_not-found",
   "/api/analyze-website/route": "/api/analyze-website",
+  "/api/config-status/route": "/api/config-status",
+  "/favicon.ico/route": "/favicon.ico",
+  "/_not-found/page": "/_not-found",
+  "/api/health/route": "/api/health",
   "/page": "/"
 }

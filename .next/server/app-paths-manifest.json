@@ -1,8 +1,8 @@
 {
-  "/api/health/route": "app/api/health/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/api/config-status/route": "app/api/config-status/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/analyze-website/route": "app/api/analyze-website/route.js",
+  "/api/config-status/route": "app/api/config-status/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/health/route": "app/api/health/route.js",
   "/page": "app/page.js"
 }
