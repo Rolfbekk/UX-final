@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 60, "column": 0}, "map": {"version":3,"sources":["file:///Users/rolfbekkelund/Documents/Juvo%20Solutions/Repositories/UX-finall/UX-final/src/app/api/config-status/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  const hasApiKey = !!process.env.AZURE_OPENAI_API_KEY;\n  const hasEndpoint = !!process.env.AZURE_OPENAI_ENDPOINT;\n  const hasDeployment = !!process.env.AZURE_OPENAI_DEPLOYMENT_NAME;\n  const isConfigured = hasApiKey && hasEndpoint && hasDeployment;\n\n  return NextResponse.json({\n    hasApiKey,\n    hasEndpoint,\n    hasDeployment,\n    isConfigured,\n  });\n} "],"names":[],"mappings":";;;AAAA;;AAEO,eAAe;IACpB,MAAM,YAAY,CAAC,CAAC,QAAQ,GAAG,CAAC,oBAAoB;IACpD,MAAM,cAAc,CAAC,CAAC,QAAQ,GAAG,CAAC,qBAAqB;IACvD,MAAM,gBAAgB,CAAC,CAAC,QAAQ,GAAG,CAAC,4BAA4B;IAChE,MAAM,eAAe,aAAa,eAAe;IAEjD,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;QACvB;QACA;QACA;QACA;IACF;AACF","debugId":null}}]
+}
