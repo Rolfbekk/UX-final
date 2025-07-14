@@ -1,11 +1,13 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
+import chromium from '@sparticuz/chromium';
 
 export async function captureWebsiteScreenshot(url: string, outputDir: string = 'public/screenshots'): Promise<{ desktop: string; mobile: string }> {
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: chromium.args,
+    executablePath: await chromium.executablePath()
   });
 
   try {
@@ -69,7 +71,8 @@ export async function captureElementScreenshot(
 ): Promise<string> {
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: chromium.args,
+    executablePath: await chromium.executablePath()
   });
 
   try {
@@ -111,7 +114,8 @@ export async function getPageMetadata(url: string): Promise<{
 }> {
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: chromium.args,
+    executablePath: await chromium.executablePath()
   });
 
   try {

@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 import { WebsiteAnalysis, Issue } from '../types/analysis';
 import { captureWebsiteScreenshot } from './screenshot';
 import puppeteer from 'puppeteer';
+import chromium from '@sparticuz/chromium';
 
 // Initialize Azure OpenAI client only if environment variables are available
 let openai: OpenAI | null = null;
@@ -59,15 +60,8 @@ async function captureWebsiteContent(url: string): Promise<{
 }> {
   const browser = await puppeteer.launch({
     headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
-      '--disable-gpu'
-    ]
+    args: chromium.args,
+    executablePath: await chromium.executablePath()
   });
 
   try {

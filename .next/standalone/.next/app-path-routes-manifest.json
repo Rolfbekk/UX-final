@@ -1,8 +1,9 @@
 {
-  "/_not-found/page": "/_not-found",
-  "/api/analyze-website/route": "/api/analyze-website",
-  "/favicon.ico/route": "/favicon.ico",
   "/api/config-status/route": "/api/config-status",
+  "/_not-found/page": "/_not-found",
+  "/api/debug-env/route": "/api/debug-env",
+  "/favicon.ico/route": "/favicon.ico",
   "/api/health/route": "/api/health",
+  "/api/analyze-website/route": "/api/analyze-website",
   "/page": "/"
 }

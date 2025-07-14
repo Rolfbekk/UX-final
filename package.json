@@ -17,8 +17,8 @@
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^138.0.1",
     "dotenv": "^17.2.0",
-
     "next": "15.2.4",
     "openai": "^5.8.3",
     "playwright": "^1.53.2",
