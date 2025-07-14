@@ -61,6 +61,12 @@ async function main() {
   }
 
   // 4. Send to Azure OpenAI
+  if (!process.env.AZURE_OPENAI_API_KEY || !process.env.AZURE_OPENAI_ENDPOINT || !process.env.AZURE_OPENAI_DEPLOYMENT_NAME) {
+    console.error('❌ Azure OpenAI environment variables are not configured');
+    console.error('Please set AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT, and AZURE_OPENAI_DEPLOYMENT_NAME');
+    process.exit(1);
+  }
+  
   const openai = new OpenAI({
     apiKey: process.env.AZURE_OPENAI_API_KEY,
     baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}`,

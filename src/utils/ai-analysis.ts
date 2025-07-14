@@ -3,13 +3,17 @@ import { WebsiteAnalysis, Issue } from '../types/analysis';
 import { captureWebsiteScreenshot } from './screenshot';
 import puppeteer from 'puppeteer';
 
-// Initialize Azure OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.AZURE_OPENAI_API_KEY,
-  baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}`,
-  defaultQuery: { 'api-version': process.env.AZURE_OPENAI_API_VERSION || '2024-02-15-preview' },
-  defaultHeaders: { 'api-key': process.env.AZURE_OPENAI_API_KEY },
-});
+// Initialize Azure OpenAI client only if environment variables are available
+let openai: OpenAI | null = null;
+
+if (process.env.AZURE_OPENAI_API_KEY && process.env.AZURE_OPENAI_ENDPOINT && process.env.AZURE_OPENAI_DEPLOYMENT_NAME) {
+  openai = new OpenAI({
+    apiKey: process.env.AZURE_OPENAI_API_KEY,
+    baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}`,
+    defaultQuery: { 'api-version': process.env.AZURE_OPENAI_API_VERSION || '2024-02-15-preview' },
+    defaultHeaders: { 'api-key': process.env.AZURE_OPENAI_API_KEY },
+  });
+}
 
 // Helper function to capture website content
 async function captureWebsiteContent(url: string): Promise<{
@@ -375,6 +379,10 @@ Provide a comprehensive UX analysis focusing on accessibility, performance, usab
 IMPORTANT: Be extremely specific in your feedback. Instead of saying "some areas have low contrast", identify exactly which elements, what the colors are, and what the contrast ratio is.`;
 
   try {
+    if (!openai) {
+      throw new Error('Azure OpenAI client is not initialized - missing environment variables');
+    }
+    
     console.log('🤖 Sending request to Azure OpenAI...');
     console.log('Model:', process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4o');
     console.log('URL being analyzed:', url);
