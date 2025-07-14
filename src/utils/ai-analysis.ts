@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { WebsiteAnalysis, Issue } from '../types/analysis';
 import { captureWebsiteScreenshot } from './screenshot';
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer';
 
 // Global issue counter for unique issue IDs
 let issueCounter = 0;
