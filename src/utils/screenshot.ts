@@ -1,25 +1,12 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
+import chromium from '@sparticuz/chromium-min';
 
 export async function captureWebsiteScreenshot(url: string, outputDir: string = 'public/screenshots'): Promise<{ desktop: string; mobile: string }> {
   const browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-first-run',
-      '--no-zygote',
-      '--single-process',
-      '--disable-extensions',
-      '--disable-plugins',
-      '--disable-background-timer-throttling',
-      '--disable-backgrounding-occluded-windows',
-      '--disable-renderer-backgrounding',
-      '--disable-features=TranslateUI',
-      '--disable-ipc-flooding-protection'
-    ],
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
     headless: true,
   });
 
@@ -83,22 +70,8 @@ export async function captureElementScreenshot(
   outputDir: string = 'public/screenshots'
 ): Promise<string> {
   const browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-first-run',
-      '--no-zygote',
-      '--single-process',
-      '--disable-extensions',
-      '--disable-plugins',
-      '--disable-background-timer-throttling',
-      '--disable-backgrounding-occluded-windows',
-      '--disable-renderer-backgrounding',
-      '--disable-features=TranslateUI',
-      '--disable-ipc-flooding-protection'
-    ],
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
     headless: true,
   });
 
@@ -140,22 +113,8 @@ export async function getPageMetadata(url: string): Promise<{
   technologies: string[];
 }> {
   const browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-      '--no-first-run',
-      '--no-zygote',
-      '--single-process',
-      '--disable-extensions',
-      '--disable-plugins',
-      '--disable-background-timer-throttling',
-      '--disable-backgrounding-occluded-windows',
-      '--disable-renderer-backgrounding',
-      '--disable-features=TranslateUI',
-      '--disable-ipc-flooding-protection'
-    ],
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
     headless: true,
   });
 
