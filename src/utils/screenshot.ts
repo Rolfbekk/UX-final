@@ -1,13 +1,13 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 import path from 'path';
 import chromium from '@sparticuz/chromium';
 
 export async function captureWebsiteScreenshot(url: string, outputDir: string = 'public/screenshots'): Promise<{ desktop: string; mobile: string }> {
   const browser = await puppeteer.launch({
-    headless: true,
     args: chromium.args,
-    executablePath: await chromium.executablePath()
+    executablePath: await chromium.executablePath(),
+    headless: true,
   });
 
   try {
@@ -70,9 +70,9 @@ export async function captureElementScreenshot(
   outputDir: string = 'public/screenshots'
 ): Promise<string> {
   const browser = await puppeteer.launch({
-    headless: true,
     args: chromium.args,
-    executablePath: await chromium.executablePath()
+    executablePath: await chromium.executablePath(),
+    headless: true,
   });
 
   try {
@@ -113,9 +113,9 @@ export async function getPageMetadata(url: string): Promise<{
   technologies: string[];
 }> {
   const browser = await puppeteer.launch({
-    headless: true,
     args: chromium.args,
-    executablePath: await chromium.executablePath()
+    executablePath: await chromium.executablePath(),
+    headless: true,
   });
 
   try {

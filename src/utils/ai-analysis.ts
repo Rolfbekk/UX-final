@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { WebsiteAnalysis, Issue } from '../types/analysis';
 import { captureWebsiteScreenshot } from './screenshot';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 
 // Global issue counter for unique issue IDs
@@ -62,9 +62,9 @@ async function captureWebsiteContent(url: string): Promise<{
   };
 }> {
   const browser = await puppeteer.launch({
-    headless: true,
     args: chromium.args,
-    executablePath: await chromium.executablePath()
+    executablePath: await chromium.executablePath(),
+    headless: true,
   });
 
   try {
