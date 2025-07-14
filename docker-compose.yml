@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  aiux:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      # Add your environment variables here
+      # - AZURE_OPENAI_API_KEY=your_key
+      # - AZURE_OPENAI_ENDPOINT=your_endpoint
+      # - AZURE_OPENAI_DEPLOYMENT_NAME=your_deployment
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/config-status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 
