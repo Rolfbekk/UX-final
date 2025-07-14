@@ -4,6 +4,9 @@ import { captureWebsiteScreenshot } from './screenshot';
 import puppeteer from 'puppeteer';
 import chromium from '@sparticuz/chromium';
 
+// Global issue counter for unique issue IDs
+let issueCounter = 0;
+
 // Initialize Azure OpenAI client only if environment variables are available
 let openai: OpenAI | null = null;
 
@@ -484,8 +487,6 @@ IMPORTANT: Be extremely specific in your feedback. Instead of saying "some areas
     throw new Error(`AI analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
-
-let issueCounter = 0;
 
 function validateIssues(issues: any[], category: string): Issue[] {
   return issues.map((issue) => {
